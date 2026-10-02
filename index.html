@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AL-OSTORA GLOBAL | دليل الأسطورة العالمي</title>
+    <!-- خط Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #D4AF37;
+            --primary-hover: #b59226;
+            --bg-dark: #080808;
+            --card-bg: #111111;
+            --card-border: #222222;
+            --text-light: #ffffff;
+            --text-muted: #aaaaaa;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+
+        /* Navigation Header */
+        header {
+            background: #000;
+            border-bottom: 1px solid #1a1a1a;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container { display: flex; align-items: center; gap: 12px; }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 20px;
+        }
+        .logo-text { font-weight: 900; font-size: 18px; color: var(--primary); letter-spacing: 1px; }
+        .logo-subtext { font-size: 11px; color: var(--text-muted); display: block; margin-top: -3px; }
+
+        nav { display: flex; gap: 20px; }
+        nav a { color: var(--text-light); text-decoration: none; font-size: 14px; font-weight: 600; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--primary); }
+
+        .btn-header-wa {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        .btn-header-wa:hover { background: var(--primary); color: #000; }
+
+        /* Countries Bar */
+        .countries-bar {
+            background: #0d0d0d;
+            border-bottom: 1px solid #1f1f1f;
+            padding: 12px 5%;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            white-space: nowrap;
+            justify-content: center;
+        }
+        .country-chip {
+            background: #181818;
+            border: 1px solid #333;
+            padding: 6px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: #ccc;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .country-chip:hover, .country-chip.active {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+            font-weight: 800;
+        }
+
+        /* Hero Banner */
+        .hero {
+            text-align: center;
+            padding: 60px 5% 40px;
+            background: radial-gradient(circle at center, #1e1a0b 0%, var(--bg-dark) 70%);
+        }
+        .hero h1 { font-size: 38px; color: var(--primary); font-weight: 900; margin-bottom: 10px; }
+        .hero p { color: var(--text-muted); font-size: 16px; margin-bottom: 30px; }
+
+        .search-box {
+            max-width: 550px;
+            margin: 0 auto;
+            display: flex;
+            background: #141414;
+            border: 1px solid #333;
+            border-radius: 30px;
+            padding: 4px 8px 4px 18px;
+            align-items: center;
+        }
+        .search-box input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            padding: 10px;
+            font-size: 14px;
+        }
+        .search-box button {
+            background: var(--primary);
+            border: none;
+            color: #000;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .search-box button:hover { background: var(--primary-hover); }
+
+        /* Categories Section */
+        .categories-container { max-width: 1200px; margin: 0 auto; padding: 20px 5%; text-align: center; }
+        .section-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; color: #fff; }
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 15px;
+        }
+        .category-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 18px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .category-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+        .category-card i { font-size: 24px; color: var(--primary); margin-bottom: 8px; display: block; }
+        .category-card span { font-size: 13px; font-weight: 700; display: block; }
+
+        /* Offers Grid */
+        .offers-section { max-width: 1300px; margin: 20px auto 60px; padding: 0 5%; }
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+            position: relative;
+        }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        
+        .card-img-container { position: relative; height: 180px; width: 100%; }
+        .card-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .badge-discount {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--primary);
+            color: #000;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .card-body { padding: 18px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .location-tag { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; display: block; }
+        .card-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.4; }
+        
+        .rating { font-size: 12px; color: #ffca28; margin-bottom: 15px; }
+        .rating span { color: #777; margin-right: 4px; }
+
+        .price-container { display: flex; align-items: baseline; gap: 8px; margin-bottom: 15px; }
+        .current-price { color: var(--primary); font-size: 18px; font-weight: 800; }
+        .old-price { color: #666; font-size: 13px; text-decoration: line-through; }
+
+        .btn-wa {
+            background: #25D366;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        .btn-wa:hover { background: #1eb954; }
+
+        /* Footer */
+        footer {
+            background: #000;
+            border-top: 1px solid #1a1a1a;
+            padding: 25px 5%;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+        footer a { color: var(--primary); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .hero h1 { font-size: 28px; }
+            .countries-bar { justify-content: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- الشريط العلوي -->
+<header>
+    <div class="logo-container">
+        <div class="logo-icon"><i class="fa-solid fa-gem"></i></div>
+        <div>
+            <span class="logo-text">AL-OSTORA GLOBAL</span>
+            <span class="logo-subtext">وكالة الأسطورة العالمية</span>
+        </div>
+    </div>
+    <nav>
+        <a href="#" class="active">الرئيسية</a>
+        <a href="#">العروض</a>
+        <a href="#">الدول</a>
+        <a href="#">عن الدليل</a>
+    </nav>
+    <a href="https://wa.me/967000000000" class="btn-header-wa" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i> انضم عبر واتساب
+    </a>
+</header>
+
+<!-- شريط اختيار الدول -->
+<div class="countries-bar">
+    <div class="country-chip active" onclick="filterCountry('all', this)">🌍 جميع الدول</div>
+    <div class="country-chip" onclick="filterCountry('ye', this)">🇾🇪 اليمن</div>
+    <div class="country-chip" onclick="filterCountry('sa', this)">🇸🇦 السعودية</div>
+    <div class="country-chip" onclick="filterCountry('ae', this)">🇦🇪 الإمارات</div>
+    <div class="country-chip" onclick="filterCountry('eg', this)">🇪🇬 مصر</div>
+    <div class="country-chip" onclick="filterCountry('tr', this)">🇹🇷 تركيا</div>
+    <div class="country-chip" onclick="filterCountry('global', this)">🌐 خدمات أونلاين</div>
+</div>
+
+<!-- الواجهة الرئيسية -->
+<section class="hero">
+    <h1>كل عروض العالم في مكان واحد</h1>
+    <p>استكشف أفضل العروض، الخصومات الحصرية، والخدمات التجارية عبر العالم</p>
+    
+    <div class="search-box">
+        <input type="text" id="searchInput" onkeyup="searchOffers()" placeholder="ابحث عن عرض، متجر، أو دولة...">
+        <button onclick="searchOffers()">بحث <i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+</section>
+
+<!-- فئات العروض -->
+<div class="categories-container">
+    <div class="section-title">تصفح حسب الفئة</div>
+    <div class="categories-grid">
+        <div class="category-card"><i class="fa-solid fa-utensils"></i><span>مطاعم</span></div>
+        <div class="category-card"><i class="fa-solid fa-shirt"></i><span>ملابس</span></div>
+        <div class="category-card"><i class="fa-solid fa-mobile-screen-button"></i><span>جوالات</span></div>
+        <div class="category-card"><i class="fa-solid fa-building"></i><span>عقارات</span></div>
+        <div class="category-card"><i class="fa-solid fa-sparkles"></i><span>تجميل</span></div>
+        <div class="category-card"><i class="fa-solid fa-hotel"></i><span>فنادق</span></div>
+        <div class="category-card"><i class="fa-solid fa-handshake"></i><span>خدمات</span></div>
+    </div>
+</div>
+
+<!-- شبكة العروض -->
+<div class="offers-section">
+    <div class="section-title" style="margin-bottom: 25px;">أحدث العروض والخصومات العالمية</div>
+    
+    <div class="offers-grid" id="offersGrid">
+        
+        <!-- عرض اليمن (تعز) -->
+        <div class="card" data-country="ye">
+            <div class="card-img-container">
+                <span class="badge-discount">خصم 30%</span>
+                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600" alt="مشاوي">
+            </div>
+            <div class="card-body">
+                <div>
+                    <span class="location-tag"><i class="fa-solid fa-location-dot"></i> 🇾🇪 اليمن - تعز (شارع جمال)</span>
+                    <h3 class="card-title">خصم 30% على وجبة مشاوي مشكلة فاخرة لشخصين</h3>
+                    <div class="rating"><i class="fa-solid fa-star"></i> 4.8 <span>(24 تقييم)</span></div>
+                </div>
+                <div>
+                    <div class="price-container">
+                        <span class="current-price">12,000 ر.ي</span>
+                        <span class="old-price">17,000 ر.ي</span>
+                    </div>
+                    <a href="https://wa.me/967000000000?text=استفسار%20عن%20عرض%20المشاوي" target="_blank" class="btn-wa">
+                        <i class="fa-brands fa-whatsapp"></i> تواصل عبر واتساب
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- عرض السعودية -->
+        <div class="card" data-country="sa">
+            <div class="card-img-container">
+                <span class="badge-discount">خصم 50%</span>
+                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600" alt="فندق">
+            </div>
+            <div class="card-body">
+                <div>
+                    <span class="location-tag"><i class="fa-solid fa-location-dot"></i> 🇸🇦 السعودية - جدة (الكورنيش)</span>
+                    <h3 class="card-title">حجز مواجهة للبحر - احجز ليلتين بسعر ليلة واحدة</h3>
+                    <div class="rating"><i class="fa-solid fa-star"></i> 4.9 <span>(52 تقييم)</span></div>
+                </div>
+                <div>
+                    <div class="price-container">
+                        <span class="current-price">450 ر.س</span>
+                        <span class="old-price">900 ر.س</span>
+                    </div>
+                    <a href="https://wa.me/966000000000?text=استفسار%20عن%20عرض%20الفندق" target="_blank" class="btn-wa">
+                        <i class="fa-brands fa-whatsapp"></i> تواصل عبر واتساب
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- عرض الإمارات -->
+        <div class="card" data-country="ae">
+            <div class="card-img-container">
+                <span class="badge-discount">خصم 40%</span>
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600" alt="أحذية">
+            </div>
+            <div class="card-body">
+                <div>
+                    <span class="location-tag"><i class="fa-solid fa-location-dot"></i> 🇦🇪 الإمارات - دبي (دبي مول)</span>
+                    <h3 class="card-title">تخفيضات الأحذية الرياضية الأصلية - تشكيلة 2026</h3>
+                    <div class="rating"><i class="fa-solid fa-star"></i> 4.7 <span>(18 تقييم)</span></div>
+                </div>
+                <div>
+                    <div class="price-container">
+                        <span class="current-price">299 د.إ</span>
+                        <span class="old-price">499 د.إ</span>
+                    </div>
+                    <a href="https://wa.me/971000000000?text=استفسار%20عن%20عرض%20الأحذية" target="_blank" class="btn-wa">
+                        <i class="fa-brands fa-whatsapp"></i> تواصل عبر واتساب
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- عرض عالمي (أونلاين) -->
+        <div class="card" data-country="global">
+            <div class="card-img-container">
+                <span class="badge-discount">خصم 70%</span>
+                <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=600" alt="دورة">
+            </div>
+            <div class="card-body">
+                <div>
+                    <span class="location-tag"><i class="fa-solid fa-location-dot"></i> 🌐 عالمي - دورة أونلاين</span>
+                    <h3 class="card-title">دورة التسويق الرقمي وإدارة الوكالات الاحترافية</h3>
+                    <div class="rating"><i class="fa-solid fa-star"></i> 5.0 <span>(110 تقييم)</span></div>
+                </div>
+                <div>
+                    <div class="price-container">
+                        <span class="current-price">$49</span>
+                        <span class="old-price">$160</span>
+                    </div>
+                    <a href="https://wa.me/967000000000?text=التسجيل%20في%20دورة%20التسويق" target="_blank" class="btn-wa">
+                        <i class="fa-brands fa-whatsapp"></i> تواصل عبر واتساب
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- الفوتر -->
+<footer>
+    دليل الأسطورة العالمي © 2026 AL-OSTORA GUIDE | جميع الحقوق محفوظة لـ <a href="#">شركة الأسطورة للإعلانات والتسويق</a>
+</footer>
+
+<script>
+    // تصفية حسب الدولة
+    function filterCountry(country, element) {
+        document.querySelectorAll('.country-chip').forEach(chip => chip.classList.remove('active'));
+        element.classList.add('active');
+
+        let cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            if (country === 'all' || card.getAttribute('data-country') === country) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // البحث الفوري
+    function searchOffers() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let cards = document.querySelectorAll('.card');
+
+        cards.forEach(card => {
+            let text = card.innerText.toLowerCase();
+            if (text.includes(input)) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
